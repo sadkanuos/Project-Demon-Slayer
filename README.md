@@ -12,7 +12,20 @@ It covers the core functionalities that can be seen in a turn based game.
 + The health bar shows the health for both the players
 + When the game completes, it prompts for a new game.
 ## Screenshots
+### New Game Screen
+<img src="images/New-Game.png">
 
+### In Action Screen
+<img src="images/In-action.png">
+
+### Game Over Screens
+<img src="images/Draw-Screen.png">
+<img src="images/Winning-Screen.png">
+<img src="images/Losing-Screen.png">
+
+
+
+## Features
 ### Functionalities
 The functionalities are:
 + An attack button
