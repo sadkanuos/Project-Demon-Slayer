@@ -18,7 +18,7 @@
     </header>
     <div id="game">
       <section id="demon" class="container">
-        <h2>Demon Health</h2>
+        <h2>Demon's Health</h2>
         <div class="healthbar">
           <div class="healthbar__value" :style="demonBarStyles"></div>
         </div>
@@ -44,7 +44,26 @@
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
-        <ul></ul>
+        <ul>
+          <li v-for="logMessage in logMessages">
+            <span
+              :class="{'log--player': logMessage.actionBy === 'player', 'log--demon': logMessage.actionBy === 'Demon'}"
+              >{{ logMessage.actionBy === 'player' ? 'You' : 'Demon'
+              }}</span
+            >
+            <span v-if="logMessage.actionType === 'heal'">
+              healed yourself by
+              <span class="log--heal">{{ logMessage.actionValue }}</span></span
+            > 
+            <span v-else-if="logMessage.actionType ==='attack'">
+              attacked and dealt damage of
+              <span class="log--damage">{{ logMessage.actionValue }}</span> 
+            </span>
+            <span v-else> used a special attack and dealt damage of 
+              <span class="log--damage">{{ logMessage.actionValue }}</span>
+            </span> points.
+          </li>
+        </ul>
       </section>
     </div>
   </body>

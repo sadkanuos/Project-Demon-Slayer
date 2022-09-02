@@ -7,7 +7,8 @@ Vue.createApp({
             playerHealth: 100,
             demonHealth: 100,
             roundCounter: 0,
-            winner: null
+            winner: null,
+            logMessages: []
         };
     },
     computed:{
@@ -50,16 +51,19 @@ Vue.createApp({
             this.roundCounter++;
             const attackValue = randomValue(5, 10);
             this.demonHealth = this.demonHealth - attackValue;
+            this.addLogMessages('player', 'attack', attackValue);
             this.attackPlayer();    
         },
         attackPlayer(){
             const attackValue = randomValue(8, 20);
             this.playerHealth = this.playerHealth - attackValue;
+            this.addLogMessages('Demon', 'attack', attackValue);
         },
         specialAttackDemon(){
             this.roundCounter++;
             const attackValue = randomValue(10, 30);
             this.demonHealth = this.demonHealth - attackValue;
+            this.addLogMessages('player', 'Special attack', attackValue);
             this.attackPlayer();
         },
         healPlayer(){
@@ -70,6 +74,7 @@ Vue.createApp({
             } else { 
                 this.playerHealth = this.playerHealth + healValue;
             }
+            this.addLogMessages('player', 'heal', healValue);
             this.attackPlayer();
         },
         startNewGame(){
@@ -77,9 +82,17 @@ Vue.createApp({
             this.demonHealth = 100;
             this.roundCounter = 0;
             this.winner = null;
+            this.logMessages = [];
         }, 
         surrenderGame(){
             this.winner = 'demon';
+        },
+        addLogMessages(party, action, value){
+            this.logMessages.unshift({
+                actionBy: party,
+                actionType: action,
+                actionValue: value
+            });     // push the message at the end of the array
         }
     }
 }).mount('#game');
