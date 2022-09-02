@@ -6,7 +6,8 @@ Vue.createApp({
         return{
             playerHealth: 100,
             demonHealth: 100,
-            roundCounter: 0
+            roundCounter: 0,
+            winner: null
         };
     },
     computed:{
@@ -17,7 +18,23 @@ Vue.createApp({
             return { width: this.playerHealth + '%'};
         },
         specialAttackWatcher(){
-            return this.roundCounter % 4 !== 0;
+            return this.roundCounter % 3 !== 0;
+        }
+    },
+    watch: {
+        playerHealth(value) {
+            if(value <= 0 && this.demonHealth <= 0){
+                this.winner = 'draw';
+            } else if (value <= 0){
+                this.winner = 'demon';
+            }
+        },
+        demonHealth(value) {
+            if(value <= 0 && this.playerHealth <= 0){
+                this.winner = 'draw';
+            } else if (value <= 0){
+                this.winner = 'player';
+            }
         }
     },
     methods:{
@@ -28,7 +45,7 @@ Vue.createApp({
             this.attackPlayer();    
         },
         attackPlayer(){
-            const attackValue = randomValue(12, 20);
+            const attackValue = randomValue(8, 20);
             this.playerHealth = this.playerHealth - attackValue;
         },
         specialAttackDemon(){
