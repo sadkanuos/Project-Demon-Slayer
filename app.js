@@ -12,10 +12,18 @@ Vue.createApp({
     },
     computed:{
         demonBarStyles(){
-            return { width: this.demonHealth + '%'};
+            if (this.demonHealth < 0){
+                return { width: '0%' };
+            } else {
+                return { width: this.demonHealth + '%'};
+            }
         },
         playerBarStyles(){
-            return { width: this.playerHealth + '%'};
+            if (this.playerHealth < 0){
+                return { width: '0%' };
+            } else {
+                return { width: this.playerHealth + '%'};
+            }
         },
         specialAttackWatcher(){
             return this.roundCounter % 3 !== 0;
@@ -63,6 +71,15 @@ Vue.createApp({
                 this.playerHealth = this.playerHealth + healValue;
             }
             this.attackPlayer();
+        },
+        startNewGame(){
+            this.playerHealth = 100;
+            this.demonHealth = 100;
+            this.roundCounter = 0;
+            this.winner = null;
+        }, 
+        surrenderGame(){
+            this.winner = 'demon';
         }
     }
 }).mount('#game');
