@@ -1,6 +1,6 @@
 # Vue.js Project: Demon-Slayer
 
-This project is a part of the UDEMY COURSE: Vue.js is an awesome JavaScript Framework for building Frontend Applications! VueJS mixes the Best of Angular + React! by Academind.
+This project is a part of the UDEMY COURSE: Vue.js: The Complete Guide by Academind.
 
 This is a turn based click-only game without any in-game graphical assets.
 It covers the core functionalities that can be seen in a turn based game.
